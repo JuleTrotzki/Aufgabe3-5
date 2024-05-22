@@ -53,7 +53,7 @@ def add_HR_zones(df):
     zone4_min = 0.80 * hr_max
     zone4_max = 0.90 * hr_max
     zone5_min = 0.90 * hr_max
-    zone5_max = 1 * hr_max
+    zone5_max = 1,0 * hr_max
     
     df['zone 1'] = df['Heartrate'] > zone1_min and df['Heartrate'] < zone1_max
     df['zone 2'] = df['Heartrate'] > zone2_min and df['Heartrate'] < zone2_max
