@@ -40,6 +40,8 @@ def compute_power_statistics(df):
 def plot_pow_HR(df):
     fig = px.line(df, x= "time", y="PowerOriginal")
     fig.add_trace(go.Scatter(x=df['time'], y=df['HeartRate'], mode='lines', name='Herzfrequenz'))
+    fig.update_layout(title='Power und Herzfrequenz', xaxis_title='Zeit', yaxis_title='Power und Herzfrequenz')
+
     return fig
 
 
@@ -64,8 +66,15 @@ def add_HR_zones(df):
     
     return df
 
-#def compute_power_in_zones(df):
-    #return [p_1. p_2, ...]
+def compute_power_in_zones(df):
+    zone1_mean = df.loc[df['zone 1'], 'PowerOriginal'].mean()
+    zone2_mean = df.loc[df['zone 2'], 'PowerOriginal'].mean()
+    zone3_mean = df.loc[df['zone 3'], 'PowerOriginal'].mean()
+    zone4_mean = df.loc[df['zone 4'], 'PowerOriginal'].mean()
+    zone5_mean = df.loc[df['zone 5'], 'PowerOriginal'].mean()
+    
+    return [zone1_mean, zone2_mean, zone3_mean, zone4_mean, zone5_mean]
+
     
     
 def make_plot(df):
