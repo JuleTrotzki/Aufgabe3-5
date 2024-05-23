@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 from read_pandas_jule import (
     read_activity_csv, 
     compute_power_statistics, 
@@ -8,18 +9,12 @@ from read_pandas_jule import (
     compute_power_in_zones
 )
 
-# Power-Daten und Herzfrequenzzonen anzeigen
-st.header("Power-Data")
+st.header("Auswertung von Leistung und Herzfrequenz")
 
-# Power-Daten einlesen
 df = read_activity_csv()
 
-# Statistiken zu den Power-Daten berechnen
-p_mean, p_max, hr_max = compute_power_statistics(df)
-st.write("Durchschnittliche Leistung:", p_mean, "W")
-st.write("Maximale Leistung:", p_max, "W")
-
 # Manuelle Eingabe der maximalen Herzfrequenz
+p_mean, p_max, hr_max = compute_power_statistics(df)
 hr_max_input = st.number_input("Gib die maximale Herzfrequenz ein:", min_value=1, max_value=300, value=int(hr_max))
 
 # Herzfrequenzzonen hinzufügen
@@ -27,13 +22,15 @@ df = add_HR_zones(df, hr_max_input)
 
 # Zeit in Herzfrequenzzonen berechnen
 time_in_zones = compute_time_in_zones(df)
-for zone, time in time_in_zones.items():
-    st.write(f"Zeit in {zone}: {time} Sekunden")
+time_df = pd.DataFrame.from_dict(time_in_zones, orient = 'index', columns = ['Zeit (s)'])
+st.write("Zeit pro Zone:")
+st.write(time_df)
 
 # Durchschnittliche Leistung in Herzfrequenzzonen berechnen
 power_in_zones = compute_power_in_zones(df)
-for zone, power in power_in_zones.items():
-    st.write(f"Durchschnittliche Leistung in {zone}: {power} Watt")
+power_df = pd.DataFrame.from_dict(power_in_zones, orient = 'index', columns = ['Leistung (W)'])
+st.write("Leistung pro Zone:")
+st.write(power_df)
 
 # Plot von Leistung und Herzfrequenz über die Zeit anzeigen
 fig = plot_pow_HR(df)
