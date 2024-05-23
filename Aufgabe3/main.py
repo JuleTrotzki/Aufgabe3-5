@@ -1,22 +1,37 @@
 import streamlit as st
-from read_pandas import read_my_csv
-from read_pandas import make_plot
+import pandas as pd
+from read_pandas import (
+    read_activity_csv, 
+    compute_power_statistics, 
+    plot_pow_HR, 
+    add_HR_zones, 
+    compute_time_in_zones, 
+    compute_power_in_zones
+)
 
+st.header("Auswertung von Leistung und Herzfrequenz")
 
-# Wo startet sie Zeitreihe
-# Wo endet sich
-# Was ist die Maximale und Minimale Spannung
-# Grafik
-tab1, tab2 = st.tabs(["EKG-Data", "Power-Data"])
+df = read_activity_csv()
 
-with tab1:
-    st.header("EKG-Data")
-    st.write("# My Plot")
+# Manuelle Eingabe der maximalen Herzfrequenz
+p_mean, p_max, hr_max = compute_power_statistics(df)
+hr_max_input = st.number_input("Gib die maximale Herzfrequenz ein:", min_value=1, max_value=300, value=int(hr_max))
 
-    df = read_my_csv()
-    fig = make_plot(df)
+# Herzfrequenzzonen hinzufügen
+df = add_HR_zones(df, hr_max_input)
 
-    st.plotly_chart(fig)
+# Zeit in Herzfrequenzzonen berechnen
+time_in_zones = compute_time_in_zones(df)
+time_df = pd.DataFrame.from_dict(time_in_zones, orient = 'index', columns = ['Zeit (s)'])
+st.write("Zeit pro Zone:")
+st.write(time_df)
 
-with tab2:
-    st.header("Power-Data")
+# Durchschnittliche Leistung in Herzfrequenzzonen berechnen
+power_in_zones = compute_power_in_zones(df)
+power_df = pd.DataFrame.from_dict(power_in_zones, orient = 'index', columns = ['Leistung (W)'])
+st.write("Leistung pro Zone:")
+st.write(power_df)
+
+# Plot von Leistung und Herzfrequenz über die Zeit anzeigen
+fig = plot_pow_HR(df)
+st.plotly_chart(fig)
