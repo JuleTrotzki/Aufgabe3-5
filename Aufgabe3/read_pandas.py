@@ -16,7 +16,7 @@ import plotly.graph_objects as go
 
 # Daten einlesen
 def read_activity_csv():
-    path = 'C:/code/programmieruebung2/Aufgabe3-5/data/activities/activity.csv'
+    path = 'data/activities/activity.csv'
     df = pd.read_csv(path)
     df['time'] = df['Duration'].cumsum()
     
