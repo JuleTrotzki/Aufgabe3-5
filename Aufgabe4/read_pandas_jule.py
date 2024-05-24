@@ -1,6 +1,5 @@
 # %%
 import pandas as pd
-import plotly.express as px
 import plotly.graph_objects as go
 import numpy as np
 from matplotlib.ticker import FuncFormatter
@@ -53,12 +52,8 @@ def plot_power_curve(power_curve_df):
     fig.update_xaxes(tickvals=[1, 2, 5, 10, 20, 30, 60, 120, 300, 600, 1200, 1800],
                      ticktext=["1s", "2s", "5s", "10s", "20s", "30s", "1min", "2min", "5min", "10min", "20min", "30min"])
                       
-    fig.show()
+    return fig
     
-
-  
-    
-
 
 #%%
 # Beispiel zur Demonstration
