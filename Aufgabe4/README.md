@@ -6,7 +6,7 @@ Dieses Programm ermöglicht die Analyse von Leistungsdaten aus einer CSV-Datei. 
 
 ## Installation
 Klone das Repository auf deinem Computer, indem du einen Ordner erstellst und mit cd "dein Speicherort" in diesen navigierst. 
-Klone das Repository in Git Bash mit git clone https://github.com/JuleTrotzki/Aufgabe3-5.git
+Klone das Repository in Git Bash mit git clone https://github.com/JuleTrotzki/Aufgabe3-5/tree/main/Aufgabe4
 Öffne nun deinen erstellten Ordner in Visual Studio Code.
 
 ## Einrichtung der virtuellen Umgebung
@@ -34,5 +34,5 @@ Wähle die zeitliche Auflösung deiner Daten aus.
 
 Das Programm zeigt eine interaktive Power Curve Visualisierung sowie eine Tabelle mit den Zeit- und Leistungsinformationen an.
 
-![](/Screenshot_Powercurve1.png)
-![](/Screenshot_Powercurve2.png)
+![](Screenshot_Powercurve1.png)
+![](Screenshot_Powercurve2.png)
