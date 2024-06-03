@@ -34,7 +34,7 @@ Wählen Sie eine Person aus der Dropdown-Liste aus.
 Sie sehen nun die Personendaten und das Bild der Person.
 Wählen Sie einen EKG-Test aus der Liste der verfügbaren Tests aus.
 Passen Sie den Schwellenwert für die Peak-Erkennung und den Abschnitt der Zeit-Daten mit dem Schieberegler an. 
-ZU sehen sind dann die EKG-Daten und deren Peaks, sowie die berechnete Herzfrequenz in einem interaktiven Plot.
+Zu sehen sind dann die EKG-Daten und deren Peaks, sowie die berechnete Herzfrequenz in einem interaktiven Plot.
 
 
 ![](Screenshot_A5_1.png)
