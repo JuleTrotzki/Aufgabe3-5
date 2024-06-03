@@ -31,11 +31,10 @@ pip install -r requirements.txt
 streamlit run main.py
 
 Wählen Sie eine Person aus der Dropdown-Liste aus.
-Sehen Sie sich die Personendaten und das Bild der Person an.
+Sie sehen nun die Personendaten und das Bild der Person.
 Wählen Sie einen EKG-Test aus der Liste der verfügbaren Tests aus.
-Passen Sie den Schwellenwert für die Peak-Erkennung mit dem Schieberegler an.
-Sehen Sie sich die gefundenen Peaks und die berechnete Herzfrequenz an.
-Visualisieren Sie die EKG-Daten und die Peaks in einem interaktiven Plot.
+Passen Sie den Schwellenwert für die Peak-Erkennung und den Abschnitt der Zeit-Daten mit dem Schieberegler an. 
+ZU sehen sind dann die EKG-Daten und deren Peaks, sowie die berechnete Herzfrequenz in einem interaktiven Plot.
 
 
 ![](Screenshot_A5_1.png)
