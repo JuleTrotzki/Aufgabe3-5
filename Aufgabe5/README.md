@@ -36,3 +36,8 @@ Wählen Sie einen EKG-Test aus der Liste der verfügbaren Tests aus.
 Passen Sie den Schwellenwert für die Peak-Erkennung mit dem Schieberegler an.
 Sehen Sie sich die gefundenen Peaks und die berechnete Herzfrequenz an.
 Visualisieren Sie die EKG-Daten und die Peaks in einem interaktiven Plot.
+
+
+![](Screenshot_A5_1.png)
+![](Screenshot_A5_2.png)
+![](Screenshot_A5_3.png)

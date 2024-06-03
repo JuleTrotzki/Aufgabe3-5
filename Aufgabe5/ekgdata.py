@@ -40,11 +40,10 @@ class EKGdata:
    
         # Respace the series
         series = series.iloc[::respacing_factor]
-    
+     
         # Filter the series
         series = series[series>threshold]
-
-
+        
         peaks = []
         last = 0
         current = 0
@@ -61,13 +60,9 @@ class EKGdata:
         return peaks
     
     def calculate_HR(peaks, respacing_factor=5, sampling_rate=1000):
-        # Berechne die Zeitdifferenzen zwischen aufeinanderfolgenden Peaks
         peak_intervals = pd.Series(peaks).diff()
-        # Konvertiere die Zeitdifferenzen in Sekunden
-        peak_intervals_seconds = peak_intervals / (sampling_rate / respacing_factor)
-        # Berechne die Herzfrequenz als Kehrwert der durchschnittlichen Inter-Peak-Intervalle in Sekunden
+        peak_intervals_seconds = peak_intervals / (sampling_rate / respacing_factor) #in sekunden
         heart_rates = 60 / peak_intervals_seconds
-        
         heart_rates = heart_rates.dropna()
     
         df = pd.DataFrame({'Zeitpunkt': peaks[1:], 'Herzfrequenz': heart_rates})
@@ -75,10 +70,13 @@ class EKGdata:
         return df
     
 
-    def plot_time_series(df, peaks, start_index=0, end_index=None):
+    def plot_time_series(df, peaks, start_index=None, end_index=None):
         
+        if start_index is None:
+            start_index = 0
         if end_index is None:
             end_index = len(df)
+        
     
         df = df.iloc[start_index:end_index]
         
@@ -88,7 +86,7 @@ class EKGdata:
         
         fig = go.Figure()
 
-        # EKG-Daten hinzufügen
+        # EKG-Daten plotten
         fig.add_trace(go.Scatter(
             x=df['Time in ms'], 
             y=df['EKG in mV'],
@@ -105,12 +103,12 @@ class EKGdata:
 
         # Layout anpassen
         fig.update_layout(
-            title='EKG Data with Peaks',
+            title='EKG Data',
             xaxis_title='Time in ms',
             yaxis_title='EKG in mV',
             showlegend=True)
 
-        fig.show()
+        return fig
     
 if __name__ == "__main__":
     print("This is a module with some functions to read the EKG data")
@@ -122,7 +120,7 @@ if __name__ == "__main__":
     print(ekg.df.head())
     
     # Beispielaufruf der Methode load_by_id
-    test_id = 4 
+    test_id = 1
     ekg_test_data = EKGdata.load_by_id(test_id)
 
     if ekg_test_data:
@@ -134,20 +132,16 @@ if __name__ == "__main__":
     # Beispielaufruf find_peaks
     file_path = "data/ekg_data/01_Ruhe.txt"
     ekg_data = pd.read_csv(file_path, sep='\t', header=None, names=['EKG in mV', 'Time in ms'])
-    threshold = 360
+    threshold = 345
     peaks = EKGdata.find_peaks(ekg_data['EKG in mV'], threshold)
     print("Gefundene Peaks:", peaks)
+    fig = EKGdata.plot_time_series(ekg_data, peaks)
+    fig.show()
     
     # Beispielaufruf estimate_HR
     heart_rate = EKGdata.calculate_HR(peaks)
     print("Geschätzte Herzfrequenz:", heart_rate, "Schläge pro Minute")
     
-    # Beispielaufruf
-    file_path = "data/ekg_data/04_Belastung.txt"
-    ekg_data = pd.read_csv(file_path, sep='\t', header=None, names=['EKG in mV', 'Time in ms'])
-    threshold = 360
-    peaks = EKGdata.find_peaks(ekg_data['EKG in mV'], threshold)
-    EKGdata.plot_time_series(ekg_data, peaks, end_index=5000)
     
 
     

@@ -25,7 +25,7 @@ class Person:
         und die die Person als Dictionary zurück gibt"""
 
         person_data = Person.load_person_data()
-        #print(suchstring)
+        
         if suchstring == "None":
             return {}
 
